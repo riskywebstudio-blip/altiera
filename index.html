@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#F8F6F0">
+  <meta name="description" content="ALTIERA — luxury local fragrance. Temukan parfum premium dengan karakter yang mewakili dirimu.">
+  <title>ALTIERA — Luxury Local Fragrance</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: { colors: {
+      ivory: '#F8F6F0', sand: '#EFECE6', ink: '#1A1C1C',
+      emerald: '#123D36', emeraldPale: '#E3EDE9',
+      burgundy: '#7A3045', burgundyPale: '#F5E8EC',
+      plum: '#493B68', plumPale: '#EAE8F2'
+    }, fontFamily: { serif: ['Georgia', 'Times New Roman', 'serif'], sans: ['Inter', 'Arial', 'sans-serif'] } } } };
+  </script>
+  <style>
+    :root{--ivory:#F8F6F0;--sand:#EFECE6;--ink:#1A1C1C;--muted:#6f706c;--line:rgba(26,28,28,.13)}
+    *{box-sizing:border-box} html{scroll-behavior:smooth;scroll-padding-top:92px}
+    body{background:var(--ivory);color:var(--ink);font-family:Inter,Arial,sans-serif}
+    a,button{ -webkit-tap-highlight-color:transparent } button{cursor:pointer}
+    .serif{font-family:Georgia,'Times New Roman',serif}
+    .eyebrow{letter-spacing:.22em;text-transform:uppercase;font-size:.68rem;font-weight:700}
+    .marquee{overflow:hidden;white-space:nowrap;background:#123D36;color:#F8F6F0}
+    .marquee-track{display:inline-flex;min-width:max-content;animation:marquee 27s linear infinite}
+    .marquee span{padding:11px 2rem;letter-spacing:.12em;font-size:.68rem;font-weight:700}
+    @keyframes marquee{to{transform:translateX(-50%)}}
+    .site-header{backdrop-filter:blur(16px);background:rgba(248,246,240,.92);border-bottom:1px solid var(--line)}
+    .wordmark{letter-spacing:.22em;font-size:1.45rem;font-weight:500}
+    .nav-link{font-size:.72rem;letter-spacing:.09em;text-transform:uppercase;color:#4d504d;transition:color .2s}
+    .nav-link:hover{color:#123D36}
+    .btn-primary{background:var(--ink);color:var(--ivory);transition:transform .2s,background .2s}
+    .btn-primary:hover{background:#123D36;transform:translateY(-2px)}
+    .btn-outline{border:1px solid rgba(26,28,28,.28);transition:background .2s,transform .2s}
+    .btn-outline:hover{background:#EFECE6;transform:translateY(-2px)}
+    .hero-grid{display:grid;grid-template-columns:1fr;gap:2rem}
+    .hero-image{min-height:390px;position:relative;overflow:hidden;background:#e8e3d9}
+    .hero-image img{width:100%;height:100%;object-fit:cover}
+    .hero-image:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(12,20,17,.2),transparent 55%);pointer-events:none}
+    .product-card{border:1px solid var(--line);background:rgba(255,255,255,.32);transition:transform .3s,box-shadow .3s}
+    .product-card:hover{transform:translateY(-4px);box-shadow:0 18px 50px rgba(30,25,20,.07)}
+    .product-visual{position:relative;aspect-ratio:4/4.7;overflow:hidden;background:#e3e6df}
+    .product-visual img{width:100%;height:100%;object-fit:cover;transition:opacity .25s,transform .5s}
+    .product-card:hover .product-visual img{transform:scale(1.025)}
+    .slide-arrow{position:absolute;top:50%;transform:translateY(-50%);width:35px;height:35px;border-radius:50%;display:grid;place-items:center;background:rgba(248,246,240,.92);border:1px solid rgba(0,0,0,.1);font-size:1.1rem}
+    .slide-arrow.left{left:10px}.slide-arrow.right{right:10px}
+    .dots{position:absolute;bottom:12px;left:0;right:0;display:flex;justify-content:center;gap:6px}
+    .dot{width:6px;height:6px;border-radius:50%;background:rgba(248,246,240,.65);border:1px solid rgba(26,28,28,.3)}
+    .dot.active{background:#1A1C1C;transform:scale(1.15)}
+    .tone-pill{font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;border:1px solid currentColor;padding:.38rem .58rem}
+    .note-card{border-top:1px solid var(--line);padding-top:1rem}
+    .finder-option{border:1px solid var(--line);transition:all .2s;text-align:left}
+    .finder-option.active{background:#123D36;color:#F8F6F0;border-color:#123D36}
+    .faq-item{border-bottom:1px solid var(--line)}
+    .faq-answer{display:none;color:#666b66;line-height:1.8;font-size:.9rem;padding:0 0 1.2rem}
+    .faq-item.open .faq-answer{display:block}
+    .faq-item.open .faq-plus{transform:rotate(45deg)}
+    .faq-plus{transition:transform .2s;font-size:1.4rem;font-weight:300}
+    .modal-backdrop{position:fixed;inset:0;background:rgba(16,20,18,.58);z-index:100;display:none;align-items:center;justify-content:center;padding:1rem}
+    .modal-backdrop.open{display:flex}
+    .modal-panel{width:min(900px,100%);max-height:90vh;overflow:auto;background:var(--ivory);animation:rise .25s ease-out}
+    @keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+    .drawer{position:fixed;inset:0 0 0 auto;width:min(88vw,370px);background:var(--ivory);z-index:80;transform:translateX(105%);transition:transform .32s ease;padding:1.5rem;box-shadow:-20px 0 60px rgba(0,0,0,.12)}
+    .drawer.open{transform:translateX(0)}
+    .drawer-scrim{position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:79;opacity:0;visibility:hidden;transition:all .3s}
+    .drawer-scrim.open{opacity:1;visibility:visible}
+    .float-btn{width:48px;height:48px;display:grid;place-items:center;border-radius:50%;box-shadow:0 8px 25px rgba(0,0,0,.16)}
+    .wa-tooltip{opacity:1;transition:opacity .7s}
+    .wa-tooltip.fade{opacity:0;pointer-events:none}
+    .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+    @media(min-width:768px){.hero-grid{grid-template-columns:1.02fr .98fr;align-items:center;gap:4rem}.hero-image{min-height:620px}.product-visual{aspect-ratio:4/4.9}}
+    @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;scroll-behavior:auto!important;transition-duration:.01ms!important}.reveal{opacity:1;transform:none}}
+  </style>
+</head>
+<body>
+  <div class="marquee" aria-label="Promo bulanan"><div class="marquee-track">
+    <span>✨ PROMO SPESIAL BULAN INI: BELI MINIMAL 2 PARFUM — GRATIS ONGKIR KE SELURUH INDONESIA! ✨</span>
+    <span>✨ PROMO SPESIAL BULAN INI: BELI MINIMAL 2 PARFUM — GRATIS ONGKIR KE SELURUH INDONESIA! ✨</span>
+  </div></div>
+  <header class="site-header sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-[70px] flex items-center justify-between gap-4">
+      <a href="#home" class="flex flex-col leading-none" aria-label="ALTIERA beranda"><span class="wordmark serif">ALTIERA</span><span class="text-[8px] tracking-[.26em] mt-1 text-stone-500">LUXURY LOCAL FRAGRANCE</span></a>
+      <nav class="hidden lg:flex items-center gap-7" aria-label="Navigasi utama">
+        <a class="nav-link" href="#koleksi">Koleksi</a><a class="nav-link" href="#filosofi">Filosofi</a><a class="nav-link" href="#aroma-finder">Aroma Finder</a><a class="nav-link" href="#notes">Piramida Aroma</a><a class="nav-link" href="#faq">FAQ</a>
+      </nav>
+      <div class="hidden md:flex items-center gap-3 text-stone-600" aria-label="Sosial media dan marketplace">
+        <a href="https://www.instagram.com/altieraperfume" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram" class="hover:text-emerald">◎</a>
+        <a href="https://www.tiktok.com/@altiera4" target="_blank" rel="noopener" aria-label="TikTok" title="TikTok" class="hover:text-emerald">♪</a>
+        <a href="https://vt.tokopedia.com/t/ZS9BW5rm2YAT7-I49W0/" target="_blank" rel="noopener" aria-label="TikTok Shop" title="TikTok Shop" class="text-[10px] font-bold">TTS</a>
+        <a href="https://s.lazada.co.id/s.ZJfbTe" target="_blank" rel="noopener" aria-label="Lazada" title="Lazada" class="text-[10px] font-bold">L</a>
+        <a href="https://id.shp.ee/DwfNyQnh" target="_blank" rel="noopener" aria-label="Shopee" title="Shopee" class="text-[10px] font-bold">S</a>
+      </div>
+      <a href="https://wa.me/6285604155088" target="_blank" rel="noopener" class="hidden sm:inline-flex btn-primary px-5 py-3 text-[10px] tracking-[.12em] uppercase">Konsultasi Aroma ↗</a>
+      <button id="menuOpen" class="lg:hidden p-2" aria-label="Buka menu" aria-expanded="false"><span class="block w-6 h-px bg-ink mb-1.5"></span><span class="block w-6 h-px bg-ink mb-1.5"></span><span class="block w-4 h-px bg-ink"></span></button>
+    </div>
+  </header>
+  <div id="drawerScrim" class="drawer-scrim"></div>
+  <aside id="mobileDrawer" class="drawer" aria-label="Menu mobile" aria-hidden="true">
+    <div class="flex items-center justify-between mb-10"><span class="wordmark serif">ALTIERA</span><button id="menuClose" class="text-3xl" aria-label="Tutup menu">×</button></div>
+    <nav class="flex flex-col gap-6">
+      <a class="nav-link drawer-link" href="#koleksi">Koleksi parfum</a><a class="nav-link drawer-link" href="#filosofi">Filosofi brand</a><a class="nav-link drawer-link" href="#aroma-finder">Temukan aromamu</a><a class="nav-link drawer-link" href="#notes">Piramida aroma</a><a class="nav-link drawer-link" href="#faq">Pertanyaan umum</a>
+    </nav>
+    <div class="border-t border-stone-300 mt-8 pt-6 flex flex-wrap gap-4 text-sm">
+      <a href="https://www.instagram.com/altieraperfume" target="_blank" rel="noopener">Instagram</a><a href="https://www.tiktok.com/@altiera4" target="_blank" rel="noopener">TikTok</a><a href="https://vt.tokopedia.com/t/ZS9BW5rm2YAT7-I49W0/" target="_blank" rel="noopener">TikTok Shop</a><a href="https://s.lazada.co.id/s.ZJfbTe" target="_blank" rel="noopener">Lazada</a><a href="https://id.shp.ee/DwfNyQnh" target="_blank" rel="noopener">Shopee</a>
+    </div>
+    <a class="btn-primary block text-center py-4 mt-8 text-xs tracking-widest uppercase" href="https://wa.me/6285604155088" target="_blank" rel="noopener">Konsultasi via WhatsApp</a>
+  </aside>
+
+  <main id="home">
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 md:pt-14 pb-16 md:pb-24">
+      <div class="hero-grid">
+        <div class="reveal py-5 md:py-10">
+          <div class="eyebrow text-emerald mb-6 flex items-center gap-3"><span class="w-8 h-px bg-emerald"></span> LUXURY LOCAL FRAGRANCE</div>
+          <h1 class="serif text-[2.75rem] sm:text-5xl lg:text-[4.2rem] leading-[1.08] tracking-[-.04em] max-w-2xl">Wangi yang Berbicara Sebelum Kamu Mengucapkan Sepatah Kata.</h1>
+          <p class="mt-6 text-stone-600 leading-7 max-w-lg text-sm sm:text-base">Parfum premium ALTIERA untuk menghadirkan karakter, kepercayaan diri, dan kesan yang sulit dilupakan.</p>
+          <div class="flex flex-col sm:flex-row gap-3 mt-8">
+            <a href="#koleksi" class="btn-primary text-center px-7 py-4 text-xs tracking-[.12em] uppercase">Jelajahi Koleksi ↗</a>
+            <a href="https://wa.me/6285604155088" target="_blank" rel="noopener" class="btn-outline text-center px-7 py-4 text-xs tracking-[.12em] uppercase">Konsultasi via WhatsApp</a>
+          </div>
+          <div class="grid grid-cols-3 gap-4 border-t border-stone-300 mt-10 pt-5 max-w-md">
+            <div><p class="serif text-2xl">30<span class="text-sm">ml</span></p><p class="text-[10px] uppercase tracking-wider text-stone-500 mt-1">Easy to carry</p></div>
+            <div><p class="serif text-2xl">EDP</p><p class="text-[10px] uppercase tracking-wider text-stone-500 mt-1">Fragrance type</p></div>
+            <div><p class="serif text-2xl">3</p><p class="text-[10px] uppercase tracking-wider text-stone-500 mt-1">Signature scents</p></div>
+          </div>
+        </div>
+        <div class="hero-image reveal">
+          <img src="assets/photo_03.jpeg" alt="Koleksi parfum ALTIERA dengan karakter luxury" fetchpriority="high">
+          <div class="absolute bottom-5 left-5 right-5 z-10 flex justify-between items-end text-ivory">
+            <div><p class="eyebrow text-white/80">THE SIGNATURE COLLECTION</p><p class="serif text-2xl mt-1 text-white">Find your presence.</p></div>
+            <span class="border border-white/50 rounded-full w-10 h-10 grid place-items-center text-white">↗</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="filosofi" class="bg-sand py-16 md:py-24">
+      <div class="max-w-4xl mx-auto px-5 text-center reveal">
+        <p class="eyebrow text-stone-500 mb-5">A SCENT WITH A POINT OF VIEW</p>
+        <h2 class="serif text-4xl sm:text-6xl tracking-tight">“Bukan Sekadar Wangi.”</h2>
+        <p class="max-w-2xl mx-auto mt-6 text-stone-600 leading-7 text-sm sm:text-base">Setiap aroma membawa bahasa tersendiri. ALTIERA merangkai pengalaman wangi untuk menemani ambisi, kelembutan, dan keberanianmu menjadi diri sendiri.</p>
+      </div>
+    </section>
+
+    <section id="koleksi" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+      <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-9 md:mb-12 reveal">
+        <div><p class="eyebrow text-stone-500 mb-3">CURATED FOR YOUR CHARACTER</p><h2 class="serif text-4xl sm:text-5xl">The Signature Collection</h2></div>
+        <p class="text-sm text-stone-500 max-w-sm leading-6">Tiga karakter aroma. Satu pilihan yang terasa personal. Pilih wangi yang paling dekat dengan ceritamu.</p>
+      </div>
+      <div id="productGrid" class="grid md:grid-cols-2 xl:grid-cols-3 gap-5 lg:gap-6"></div>
+    </section>
+
+    <section class="bg-[#E7E8E1]">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-20 grid md:grid-cols-2 gap-9 md:gap-14 items-center">
+        <div class="reveal">
+          <p class="eyebrow text-emerald mb-3">A CLOSER LOOK</p><h2 class="serif text-4xl sm:text-5xl">The feeling behind the fragrance.</h2>
+          <p class="mt-5 text-sm leading-7 text-stone-600 max-w-lg">Lihat detail visual dan karakter koleksi ALTIERA. Putar video untuk melihat produk lebih dekat.</p>
+          <a href="#koleksi" class="inline-block mt-7 border-b border-ink pb-2 text-xs tracking-widest uppercase">Jelajahi koleksi ↗</a>
+        </div>
+        <div class="aspect-[4/3] overflow-hidden bg-stone-200 reveal"><video class="w-full h-full object-cover" controls playsinline preload="metadata" poster="assets/photo_02.jpeg"><source src="assets/altiera-product-video.mp4" type="video/mp4">Browser Anda tidak mendukung video.</video></div>
+      </div>
+    </section>
+
+    <section id="aroma-finder" class="max-w-5xl mx-auto px-4 sm:px-6 py-16 md:py-24">
+      <div class="text-center reveal"><p class="eyebrow text-stone-500 mb-3">YOUR SCENT, YOUR STORY</p><h2 class="serif text-4xl sm:text-5xl">Temukan Aroma yang Mewakili Dirimu</h2><p class="text-sm text-stone-500 mt-4">Pilih karakter yang paling terasa seperti kamu.</p></div>
+      <div class="grid sm:grid-cols-3 gap-3 mt-9 reveal" id="finderOptions">
+        <button class="finder-option p-5 sm:p-6" data-result="prestige"><span class="text-2xl">✦</span><span class="block serif text-2xl mt-3">Berwibawa</span><span class="block text-xs mt-2 opacity-70">Modern, elegan, penuh percaya diri.</span></button>
+        <button class="finder-option p-5 sm:p-6" data-result="allure"><span class="text-2xl">✿</span><span class="block serif text-2xl mt-3">Anggun</span><span class="block text-xs mt-2 opacity-70">Lembut, hangat, dan memikat.</span></button>
+        <button class="finder-option p-5 sm:p-6" data-result="keangkuhan"><span class="text-2xl">◈</span><span class="block serif text-2xl mt-3">Energik</span><span class="block text-xs mt-2 opacity-70">Segar, maskulin, dan berkarakter.</span></button>
+      </div>
+      <div id="finderResult" class="hidden mt-5 p-6 sm:p-8 border border-stone-300 bg-white/30 reveal">
+        <p class="eyebrow text-stone-500">YOUR MATCH</p><div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mt-2"><div><h3 id="finderName" class="serif text-3xl"></h3><p id="finderCopy" class="text-sm text-stone-600 mt-2"></p></div><button id="finderDetail" class="btn-primary px-6 py-3 text-xs uppercase tracking-widest">Lihat detail ↗</button></div>
+      </div>
+    </section>
+
+    <section id="notes" class="bg-sand py-16 md:py-24">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-2xl reveal"><p class="eyebrow text-stone-500 mb-3">THE ART OF LAYERED SCENT</p><h2 class="serif text-4xl sm:text-5xl">Fragrance Pyramid</h2><p class="text-sm text-stone-600 leading-7 mt-4">Aroma berkembang seiring waktu. Kenali top, heart, dan base notes dari setiap karakter ALTIERA.</p></div>
+        <div id="pyramidGrid" class="grid md:grid-cols-3 gap-5 mt-10"></div>
+      </div>
+    </section>
+
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+      <div class="text-center reveal"><p class="eyebrow text-stone-500 mb-3">THE ALTIERA STANDARD</p><h2 class="serif text-4xl sm:text-5xl">Kenapa ALTIERA?</h2></div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-7 mt-12">
+        <article class="note-card reveal"><span class="serif text-3xl">01</span><h3 class="serif text-xl mt-4">Premium Formulation</h3><p class="text-sm text-stone-500 leading-6 mt-2">Karakter aroma berlapis yang dirancang untuk menemani momenmu.</p></article>
+        <article class="note-card reveal"><span class="serif text-3xl">02</span><h3 class="serif text-xl mt-4">Elegant Sillage</h3><p class="text-sm text-stone-500 leading-6 mt-2">Jejak aroma yang memberi kesan tanpa perlu berlebihan.</p></article>
+        <article class="note-card reveal"><span class="serif text-3xl">03</span><h3 class="serif text-xl mt-4">Long-Lasting Character</h3><p class="text-sm text-stone-500 leading-6 mt-2">Performa dapat berbeda sesuai kulit, cuaca, aktivitas, dan cara pemakaian.</p></article>
+        <article class="note-card reveal"><span class="serif text-3xl">04</span><h3 class="serif text-xl mt-4">Aman di Kain Putih*</h3><p class="text-sm text-stone-500 leading-6 mt-2">Klaim sesuai informasi brand. Uji semprot di area tersembunyi terlebih dahulu.</p></article>
+      </div>
+    </section>
+
+    <section class="bg-[#EDE7DC] py-16 md:py-24">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-2xl reveal"><p class="eyebrow text-stone-500 mb-3">MAKE IT LAST</p><h2 class="serif text-4xl sm:text-5xl">Cara Mendapatkan Performa Aroma Terbaik</h2></div>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-10">
+          <article class="bg-ivory/70 p-6 reveal"><span class="eyebrow text-emerald">01 / APPLY</span><h3 class="serif text-2xl mt-5">Pulse Points</h3><p class="text-sm text-stone-600 leading-6 mt-3">Semprot tipis pada titik nadi seperti pergelangan tangan atau sisi leher.</p></article>
+          <article class="bg-ivory/70 p-6 reveal"><span class="eyebrow text-emerald">02 / LET IT BE</span><h3 class="serif text-2xl mt-5">Jangan Digosok</h3><p class="text-sm text-stone-600 leading-6 mt-3">Biarkan parfum mengering sendiri agar perkembangan aromanya lebih utuh.</p></article>
+          <article class="bg-ivory/70 p-6 reveal"><span class="eyebrow text-emerald">03 / PREPARE</span><h3 class="serif text-2xl mt-5">Kulit Lembap</h3><p class="text-sm text-stone-600 leading-6 mt-3">Gunakan pelembap tanpa aroma sebelum menyemprotkan parfum.</p></article>
+          <article class="bg-ivory/70 p-6 reveal"><span class="eyebrow text-emerald">04 / PRESERVE</span><h3 class="serif text-2xl mt-5">Penyimpanan</h3><p class="text-sm text-stone-600 leading-6 mt-3">Simpan tertutup di tempat sejuk, kering, dan jauh dari sinar matahari langsung.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+      <div class="bg-emerald text-ivory p-7 sm:p-12 lg:p-16 grid md:grid-cols-[1.3fr_.7fr] gap-8 items-center reveal">
+        <div><p class="eyebrow text-white/60 mb-4">THE MORE YOU DISCOVER</p><h2 class="serif text-4xl sm:text-5xl leading-tight">Bawa Pulang Lebih dari Satu Karakter.</h2><p class="text-sm text-white/75 leading-7 mt-5 max-w-xl">Padukan aroma untuk suasana yang berbeda. Beli minimal 2 parfum untuk menikmati promo gratis ongkir ke seluruh Indonesia sesuai syarat promo yang berlaku.</p></div>
+        <div class="md:text-right"><p class="serif text-5xl">Rp99.000</p><p class="text-xs tracking-widest uppercase text-white/60 mt-2">per botol · 30 ml</p><a href="https://id.shp.ee/DwfNyQnh" target="_blank" rel="noopener" class="inline-block bg-ivory text-emerald px-7 py-4 mt-6 text-xs tracking-widest uppercase hover:bg-white">Belanja di Shopee ↗</a></div>
+      </div>
+    </section>
+
+    <section id="faq" class="max-w-4xl mx-auto px-4 sm:px-6 py-14 md:py-20">
+      <div class="text-center mb-8 reveal"><p class="eyebrow text-stone-500 mb-3">GOOD TO KNOW</p><h2 class="serif text-4xl sm:text-5xl">Frequently Asked Questions</h2></div>
+      <div id="faqList" class="reveal">
+        <div class="faq-item"><button class="faq-question flex w-full items-center justify-between gap-4 py-5 text-left"><span class="serif text-lg">Berapa lama aroma ALTIERA bertahan?</span><span class="faq-plus">+</span></button><div class="faq-answer">Ketahanan parfum dapat berbeda pada setiap orang, tergantung jenis kulit, suhu, aktivitas, dan jumlah semprotan. Informasi brand menyebutkan kisaran 8–12 jam di kulit untuk varian tertentu; hasil pemakaian nyata dapat bervariasi.</div></div>
+        <div class="faq-item"><button class="faq-question flex w-full items-center justify-between gap-4 py-5 text-left"><span class="serif text-lg">Apakah parfum aman untuk pakaian putih?</span><span class="faq-plus">+</span></button><div class="faq-answer">Brand menyatakan produk aman di pakaian putih. Namun, hasil dapat berbeda tergantung bahan kain dan kondisi pemakaian. Untuk berjaga-jaga, hindari menyemprot terlalu dekat dan lakukan uji di area tersembunyi terlebih dahulu.</div></div>
+        <div class="faq-item"><button class="faq-question flex w-full items-center justify-between gap-4 py-5 text-left"><span class="serif text-lg">Bagaimana dengan garansi uang kembali?</span><span class="faq-plus">+</span></button><div class="faq-answer">Informasi produk menyebutkan garansi uang kembali 100% dengan klaim maksimal 7 hari melalui Shopee. Ketentuan, bukti yang diperlukan, dan kelayakan klaim mengikuti kebijakan toko dan marketplace yang berlaku. Silakan hubungi penjual sebelum mengajukan klaim.</div></div>
+        <div class="faq-item"><button class="faq-question flex w-full items-center justify-between gap-4 py-5 text-left"><span class="serif text-lg">Kapan pesanan dikirim?</span><span class="faq-plus">+</span></button><div class="faq-answer">Informasi brand: pengiriman Senin–Sabtu. Pesanan sebelum pukul 15.00 WIB ditargetkan dikirim pada hari yang sama. Waktu proses dan estimasi tiba mengikuti jam operasional serta layanan kurir.</div></div>
+        <div class="faq-item"><button class="faq-question flex w-full items-center justify-between gap-4 py-5 text-left"><span class="serif text-lg">Bagaimana cara memilih aroma yang cocok?</span><span class="faq-plus">+</span></button><div class="faq-answer">Gunakan Aroma Finder di halaman ini sebagai panduan awal. Kamu juga bisa berkonsultasi langsung melalui WhatsApp untuk mendiskusikan preferensi aroma dan aktivitas sehari-hari.</div></div>
+        <div class="faq-item"><button class="faq-question flex w-full items-center justify-between gap-4 py-5 text-left"><span class="serif text-lg">Di mana saya bisa membeli ALTIERA?</span><span class="faq-plus">+</span></button><div class="faq-answer">Kamu dapat berbelanja melalui Shopee, TikTok Shop, atau Lazada menggunakan tautan resmi yang tersedia pada halaman ini. Untuk pertanyaan produk, hubungi WhatsApp ALTIERA.</div></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-[#EAE7DF] pt-12 pb-7">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-9 pb-10 border-b border-stone-300">
+        <div class="sm:col-span-2"><a href="#home" class="wordmark serif">ALTIERA</a><p class="eyebrow text-stone-500 mt-2">LUXURY LOCAL FRAGRANCE</p><p class="text-sm text-stone-600 leading-6 mt-5 max-w-sm">Wangi yang berbicara sebelum kamu mengucapkan sepatah kata. Temukan karakter aroma yang terasa personal.</p></div>
+        <div><h3 class="eyebrow mb-4">EXPLORE</h3><div class="flex flex-col gap-3 text-sm text-stone-600"><a href="#koleksi">Signature Collection</a><a href="#aroma-finder">Aroma Finder</a><a href="#notes">Fragrance Pyramid</a><a href="#faq">FAQ</a></div></div>
+        <div><h3 class="eyebrow mb-4">CONNECT & SHOP</h3><div class="flex flex-col gap-3 text-sm text-stone-600">
+          <a href="https://wa.me/6285604155088" target="_blank" rel="noopener">WhatsApp</a><a href="https://www.instagram.com/altieraperfume" target="_blank" rel="noopener">Instagram</a><a href="https://www.tiktok.com/@altiera4" target="_blank" rel="noopener">TikTok</a><a href="https://vt.tokopedia.com/t/ZS9BW5rm2YAT7-I49W0/" target="_blank" rel="noopener">TikTok Shop</a><a href="https://s.lazada.co.id/s.ZJfbTe" target="_blank" rel="noopener">Lazada</a><a href="https://id.shp.ee/DwfNyQnh" target="_blank" rel="noopener">Shopee</a>
+        </div></div>
+      </div>
+      <div class="flex flex-col sm:flex-row justify-between gap-3 pt-6 text-[11px] text-stone-500"><span>© 2026 ALTIERA. All rights reserved.</span><span>Crafted for your signature presence.</span></div>
+    </div>
+  </footer>
+
+  <div class="fixed bottom-5 right-4 sm:right-6 z-[70] flex items-center gap-3">
+    <span id="waTooltip" class="wa-tooltip bg-ink text-ivory text-xs px-3 py-2 shadow-lg">Konsultasi Aroma</span>
+    <a href="https://wa.me/6285604155088" target="_blank" rel="noopener" class="float-btn bg-[#1E9E60] text-white text-2xl" aria-label="Konsultasi Aroma via WhatsApp" title="Konsultasi Aroma">
+      <svg width="25" height="25" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.52 3.48A11.8 11.8 0 0 0 12.12 0C5.57 0 .24 5.33.24 11.88c0 2.09.55 4.13 1.59 5.93L.14 24l6.34-1.66a11.9 11.9 0 0 0 5.64 1.44h.01c6.55 0 11.88-5.33 11.88-11.88a11.8 11.8 0 0 0-3.49-8.42ZM12.13 21.75a9.85 9.85 0 0 1-5.02-1.37l-.36-.21-3.76.99 1-3.66-.24-.38a9.8 9.8 0 0 1-1.5-5.24c0-5.44 4.43-9.87 9.88-9.87a9.8 9.8 0 0 1 6.98 2.89 9.8 9.8 0 0 1 2.89 6.98c0 5.45-4.43 9.87-9.87 9.87Zm5.42-7.39c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.47-.89-.79-1.49-1.77-1.67-2.07-.17-.3-.02-.46.13-.61.14-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.49s1.07 2.89 1.22 3.09c.15.2 2.1 3.21 5.09 4.5.71.31 1.26.5 1.69.64.71.23 1.36.2 1.87.12.57-.08 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.13-.27-.2-.57-.35Z"/></svg>
+    </a>
+  </div>
+  <button id="backTop" class="fixed bottom-5 left-4 sm:left-6 z-[70] float-btn bg-ivory border border-stone-300 text-ink text-xl opacity-0 pointer-events-none transition-all" aria-label="Kembali ke atas" title="Kembali ke atas">↑</button>
+
+  <div id="productModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-panel">
+      <div class="sticky top-0 bg-ivory/95 backdrop-blur border-b border-stone-300 px-5 sm:px-8 py-4 flex justify-between items-center z-10"><span class="eyebrow text-stone-500">PRODUCT DETAILS</span><button id="modalClose" class="text-3xl leading-none" aria-label="Tutup detail">×</button></div>
+      <div id="modalContent" class="p-5 sm:p-8"></div>
+    </div>
+  </div>
+
+  <script>
+    const LINKS = {
+      whatsapp: 'https://wa.me/6285604155088',
+      tiktokShop: 'https://vt.tokopedia.com/t/ZS9BW5rm2YAT7-I49W0/',
+      lazada: 'https://s.lazada.co.id/s.ZJfbTe',
+      shopee: 'https://id.shp.ee/DwfNyQnh',
+      instagram: 'https://www.instagram.com/altieraperfume',
+      tiktok: 'https://www.tiktok.com/@altiera4'
+    };
+    const PRODUCTS = [
+      {
+        id:'prestige', name:'ALTIERA PRESTIGE', type:'Parfum Pria', color:'#123D36', pale:'#E3EDE9',
+        mood:'Modern dan ningrat', description:'Modern dan ningrat, cocok untuk harian maupun acara spesial.',
+        top:'Daun mint dingin, apel hijau segar, dan kulit jeruk pahit.',
+        heart:'Lavender pekat berpadu kayu bangsawan; karakter pria karismatik, sukses, dan berwibawa.',
+        base:'Madu murni, kacang hazelnut, dan amber hangat.',
+        spec:'Eau de Parfum · 30 ml', longevity:'Informasi brand: 8–12 jam di kulit / hingga 2 hari di pakaian. Performa dapat berbeda pada tiap pemakai.',
+        uses:'Harian, kantor, nongkrong, meeting bisnis, dan kencan malam.',
+        safety:'Brand menyatakan aman di pakaian putih tanpa noda/bekas kuning. Lakukan uji pada area tersembunyi terlebih dahulu.',
+        shipping:'Pengiriman Senin–Sabtu. Pesanan sebelum pukul 15.00 WIB ditargetkan dikirim hari yang sama. Packing bubble wrap tebal.',
+        guarantee:'Informasi brand: garansi uang kembali 100%, klaim maksimal 7 hari melalui Shopee, sesuai syarat dan ketentuan toko/marketplace.',
+        images: ["assets/photo_05.jpeg", "assets/photo_06.jpeg", "assets/photo_07.jpeg", "assets/photo_08.jpeg", "assets/photo_03.jpeg"]
+      },
+      {
+        id:'allure', name:'ALTIERA ALLURE', type:'Parfum Wanita', color:'#7A3045', pale:'#F5E8EC',
+        mood:'Lembut dan anggun', description:'Lembut dan anggun, cocok untuk harian maupun acara spesial.',
+        top:'Buah raspberry liar dan ceri hitam; soft dan elegan.',
+        heart:'Kopi hitam premium berpadu bunga peony, berkelas khas butik mewah.',
+        base:'Kayu vanila Madagaskar yang hangat dan lembut bercampur karamel.',
+        spec:'Eau de Parfum · 30 ml', longevity:'Informasi brand: 8–12 jam di kulit / hingga 2 hari di pakaian. Performa dapat berbeda pada tiap pemakai.',
+        uses:'Harian, kantor, kuliah, dan acara spesial.',
+        safety:'Brand menyatakan aman di pakaian putih. Lakukan uji pada area tersembunyi terlebih dahulu.',
+        shipping:'Pengiriman cepat sesuai jadwal operasional dan layanan kurir.',
+        guarantee:'Informasi brand: garansi uang kembali 100%; detail klaim mengikuti syarat toko dan marketplace.',
+        images: ["assets/photo_10.jpeg", "assets/photo_11.jpeg", "assets/photo_12.jpeg", "assets/photo_09.jpeg"]
+      },
+      {
+        id:'keangkuhan', name:'ALTIERA KEANGKUHAN', type:'Parfum Pria', color:'#493B68', pale:'#EAE8F2',
+        mood:'Segar dan maskulin', description:'Segar dan maskulin, dirancang untuk pemakaian harian dan outdoor.',
+        top:'Buah nanas dan jeruk bergamot yang energik dan bersih.',
+        heart:'Kayu cedarwood dengan sentuhan smoky yang maskulin dan berwibawa.',
+        base:'Amber emas dan madu hitam hangat.',
+        spec:'Eau de Parfum · 30 ml', longevity:'Ketahanan tinggi menurut informasi brand; hasil dapat berbeda sesuai kulit, cuaca, dan aktivitas.',
+        uses:'Harian, kantor, olahraga, dan aktivitas outdoor.',
+        safety:'Brand menyatakan aman di pakaian putih. Lakukan uji pada area tersembunyi terlebih dahulu.',
+        shipping:'Pengiriman cepat sesuai jadwal operasional dan layanan kurir.',
+        guarantee:'Informasi brand: garansi uang kembali 100%; detail klaim mengikuti syarat toko dan marketplace.',
+        images: ["assets/photo_14.jpeg", "assets/photo_15.jpeg", "assets/photo_16.jpeg", "assets/photo_13.jpeg"]
+      }
+    ];
+    const marketButtons = () => `<div class="grid grid-cols-3 gap-2 mt-3"><a class="btn-outline text-center py-2.5 text-[10px] uppercase tracking-wider" href="${LINKS.tiktokShop}" target="_blank" rel="noopener">TikTok Shop</a><a class="btn-outline text-center py-2.5 text-[10px] uppercase tracking-wider" href="${LINKS.lazada}" target="_blank" rel="noopener">Lazada</a><a class="btn-outline text-center py-2.5 text-[10px] uppercase tracking-wider" href="${LINKS.shopee}" target="_blank" rel="noopener">Shopee</a></div>`;
+    function renderProducts(){
+      const grid=document.getElementById('productGrid');
+      grid.innerHTML=PRODUCTS.map(p=>`<article class="product-card reveal" style="--accent:${p.color}">
+        <div class="product-visual" data-carousel="${p.id}">
+          <img class="carousel-image" src="${p.images[0]}" alt="${p.name} — foto produk 1" loading="lazy">
+          <button class="slide-arrow left" data-prev="${p.id}" aria-label="Foto sebelumnya">‹</button><button class="slide-arrow right" data-next="${p.id}" aria-label="Foto berikutnya">›</button>
+          <div class="dots" data-dots="${p.id}">${p.images.map((_,i)=>`<button class="dot ${i===0?'active':''}" data-dot="${p.id}" data-index="${i}" aria-label="Lihat foto ${i+1}"></button>`).join('')}</div>
+          <span class="absolute top-3 left-3 tone-pill bg-ivory/90" style="color:${p.color}">${p.type}</span>
+        </div>
+        <div class="p-5 sm:p-6">
+          <div class="flex items-start justify-between gap-3"><div><p class="eyebrow text-stone-500">${p.spec}</p><h3 class="serif text-2xl mt-2">${p.name}</h3></div><p class="serif text-xl whitespace-nowrap">Rp99.000</p></div>
+          <p class="text-sm text-stone-600 leading-6 mt-3">${p.description}</p>
+          <div class="mt-4 p-3" style="background:${p.pale}"><p class="text-[10px] tracking-widest uppercase mb-1" style="color:${p.color}">SCENT PROFILE</p><p class="text-xs leading-5 text-stone-700"><b>Top:</b> ${p.top}</p></div>
+          <button class="w-full btn-outline py-3 mt-4 text-xs tracking-widest uppercase" data-detail="${p.id}">Lihat Detail +</button>
+          <a class="block btn-primary text-center py-3.5 mt-2 text-xs tracking-widest uppercase" href="${LINKS.whatsapp}?text=${encodeURIComponent('Halo ALTIERA, saya tertarik dengan '+p.name+' 30ml seharga Rp99.000. Boleh minta informasi lebih lanjut?')}" target="_blank" rel="noopener">Beli via WhatsApp ↗</a>
+          ${marketButtons()}
+        </div>
+      </article>`).join('');
+      document.querySelectorAll('[data-prev]').forEach(b=>b.addEventListener('click',()=>moveSlide(b.dataset.prev,-1)));
+      document.querySelectorAll('[data-next]').forEach(b=>b.addEventListener('click',()=>moveSlide(b.dataset.next,1)));
+      document.querySelectorAll('[data-dot]').forEach(b=>b.addEventListener('click',()=>setSlide(b.dataset.dot,Number(b.dataset.index))));
+      document.querySelectorAll('[data-detail]').forEach(b=>b.addEventListener('click',()=>openModal(b.dataset.detail)));
+      observeReveals();
+    }
+    const slideState={prestige:0,allure:0,keangkuhan:0};
+    function setSlide(id,index){
+      const p=PRODUCTS.find(x=>x.id===id);if(!p)return;
+      slideState[id]=(index+p.images.length)%p.images.length;
+      const wrap=document.querySelector(`[data-carousel="${id}"]`);
+      const img=wrap.querySelector('.carousel-image');
+      img.style.opacity='0.3';
+      const nextSrc=p.images[slideState[id]];
+      const preload=new Image();preload.onload=()=>{img.src=nextSrc;img.alt=`${p.name} — foto produk ${slideState[id]+1}`;img.style.opacity='1'};preload.onerror=()=>{img.src=nextSrc;img.style.opacity='1'};preload.src=nextSrc;
+      wrap.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i===slideState[id]));
+    }
+    function moveSlide(id,dir){const p=PRODUCTS.find(x=>x.id===id);setSlide(id,slideState[id]+dir);}
+    function renderPyramids(){
+      document.getElementById('pyramidGrid').innerHTML=PRODUCTS.map(p=>`<article class="bg-ivory p-6 sm:p-7 reveal"><span class="tone-pill" style="color:${p.color}">${p.type}</span><h3 class="serif text-2xl mt-5">${p.name}</h3><div class="mt-6 space-y-5"><div class="note-card"><p class="eyebrow text-stone-500">01 · TOP NOTES</p><p class="text-sm leading-6 mt-2">${p.top}</p><p class="text-xs text-stone-400 mt-1">15 menit pertama</p></div><div class="note-card"><p class="eyebrow text-stone-500">02 · HEART NOTES</p><p class="text-sm leading-6 mt-2">${p.heart}</p><p class="text-xs text-stone-400 mt-1">Jam 1–3</p></div><div class="note-card"><p class="eyebrow text-stone-500">03 · BASE NOTES</p><p class="text-sm leading-6 mt-2">${p.base}</p><p class="text-xs text-stone-400 mt-1">Aroma dasar yang tertinggal</p></div></div></article>`).join('');
+    }
+    function openModal(id){
+      const p=PRODUCTS.find(x=>x.id===id);if(!p)return;
+      document.getElementById('modalContent').innerHTML=`<div class="grid md:grid-cols-[.85fr_1.15fr] gap-7">
+        <div><div class="aspect-[4/5] overflow-hidden" style="background:${p.pale}"><img src="${p.images[0]}" alt="${p.name}" class="w-full h-full object-cover"></div><div class="mt-4 p-4" style="background:${p.pale}"><p class="eyebrow" style="color:${p.color}">${p.type}</p><p class="serif text-2xl mt-2">${p.name}</p><p class="serif text-2xl mt-2">Rp99.000</p><p class="text-xs text-stone-500 mt-1">Eau de Parfum · 30 ml</p></div></div>
+        <div><p class="eyebrow text-stone-500">THE SCENT STORY</p><h2 id="modalTitle" class="serif text-3xl sm:text-4xl mt-3">${p.name}</h2><p class="text-sm text-stone-600 leading-7 mt-4">${p.description}</p>
+        <div class="mt-6 space-y-4"><div class="note-card"><p class="eyebrow text-stone-500">TOP NOTES · 15 MENIT PERTAMA</p><p class="text-sm leading-6 mt-2">${p.top}</p></div><div class="note-card"><p class="eyebrow text-stone-500">HEART NOTES · JAM 1–3</p><p class="text-sm leading-6 mt-2">${p.heart}</p></div><div class="note-card"><p class="eyebrow text-stone-500">BASE NOTES · AROMA DASAR</p><p class="text-sm leading-6 mt-2">${p.base}</p></div></div>
+        <div class="mt-6"><p class="eyebrow text-stone-500">DETAIL & PENGIRIMAN</p><ul class="list-disc pl-5 text-sm text-stone-600 leading-7 mt-3"><li>${p.spec}</li><li>${p.longevity}</li><li>Cocok untuk: ${p.uses}</li><li>${p.safety}</li><li>${p.shipping}</li><li>${p.guarantee}</li></ul></div>
+        <a href="${LINKS.whatsapp}?text=${encodeURIComponent('Halo ALTIERA, saya ingin membeli '+p.name+' 30ml seharga Rp99.000.')}" target="_blank" rel="noopener" class="btn-primary block text-center py-4 mt-7 text-xs tracking-widest uppercase">Beli via WhatsApp ↗</a>${marketButtons()}
+        </div></div>`;
+      const modal=document.getElementById('productModal');modal.classList.add('open');document.body.style.overflow='hidden';document.getElementById('modalClose').focus();
+    }
+    function closeModal(){document.getElementById('productModal').classList.remove('open');document.body.style.overflow='';}
+    document.getElementById('modalClose').addEventListener('click',closeModal);
+    document.getElementById('productModal').addEventListener('click',e=>{if(e.target.id==='productModal')closeModal()});
+    document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();closeDrawer()}});
+    document.querySelectorAll('.faq-question').forEach(q=>q.addEventListener('click',()=>{const item=q.closest('.faq-item');item.classList.toggle('open');q.setAttribute('aria-expanded',item.classList.contains('open')?'true':'false')}));
+    const drawer=document.getElementById('mobileDrawer'),scrim=document.getElementById('drawerScrim'),menuOpen=document.getElementById('menuOpen');
+    function openDrawer(){drawer.classList.add('open');scrim.classList.add('open');drawer.setAttribute('aria-hidden','false');menuOpen.setAttribute('aria-expanded','true');document.body.style.overflow='hidden'}
+    function closeDrawer(){drawer.classList.remove('open');scrim.classList.remove('open');drawer.setAttribute('aria-hidden','true');menuOpen.setAttribute('aria-expanded','false');document.body.style.overflow=''}
+    menuOpen.addEventListener('click',openDrawer);document.getElementById('menuClose').addEventListener('click',closeDrawer);scrim.addEventListener('click',closeDrawer);document.querySelectorAll('.drawer-link').forEach(a=>a.addEventListener('click',closeDrawer));
+    const finderMatches={prestige:{name:'ALTIERA PRESTIGE',copy:'Pilihan untuk karakter modern, berwibawa, dan elegan.'},allure:{name:'ALTIERA ALLURE',copy:'Pilihan untuk karakter lembut, anggun, hangat, dan memikat.'},keangkuhan:{name:'ALTIERA KEANGKUHAN',copy:'Pilihan untuk karakter segar, maskulin, energik, dan berani.'}};
+    let chosenMatch=null;
+    document.querySelectorAll('.finder-option').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.finder-option').forEach(b=>b.classList.remove('active'));btn.classList.add('active');chosenMatch=btn.dataset.result;document.getElementById('finderName').textContent=finderMatches[chosenMatch].name;document.getElementById('finderCopy').textContent=finderMatches[chosenMatch].copy;document.getElementById('finderResult').classList.remove('hidden');document.getElementById('finderDetail').onclick=()=>openModal(chosenMatch)}));
+    const backTop=document.getElementById('backTop');
+    window.addEventListener('scroll',()=>{if(window.scrollY>500){backTop.classList.remove('opacity-0','pointer-events-none');backTop.classList.add('opacity-100')}else{backTop.classList.add('opacity-0','pointer-events-none');backTop.classList.remove('opacity-100')}},{passive:true});
+    backTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+    function observeReveals(){const items=document.querySelectorAll('.reveal:not(.visible)');if(!('IntersectionObserver' in window)){items.forEach(el=>el.classList.add('visible'));return}const io=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}}),{threshold:.08});items.forEach(el=>io.observe(el))}
+    // Tooltip automatically fades after a few seconds; WhatsApp button remains visible.
+    setTimeout(()=>document.getElementById('waTooltip').classList.add('fade'),4500);
+    renderProducts();renderPyramids();observeReveals();
+  </script>
+</body>
+</html>
