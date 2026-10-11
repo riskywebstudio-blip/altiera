@@ -76,8 +76,8 @@
 </head>
 <body>
   <div class="marquee" aria-label="Promo bulanan"><div class="marquee-track">
-    <span>✨ ALTIERA DUO DEAL — 2 PARFUM CUMA Rp179.000!</span>
-    <span>💚 LEBIH HEMAT, LEBIH WANGI — GRATIS ONGKIR SE-INDONESIA!</span>
+    <span>✨ PROMO SPESIAL BULAN INI: BELI MINIMAL 2 PARFUM — GRATIS ONGKIR KE SELURUH INDONESIA! ✨</span>
+    <span>✨ PROMO SPESIAL BULAN INI: BELI MINIMAL 2 PARFUM — GRATIS ONGKIR KE SELURUH INDONESIA! ✨</span>
   </div></div>
   <header class="site-header sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-[70px] flex items-center justify-between gap-4">
@@ -262,7 +262,7 @@
     };
     const PRODUCTS = [
       {
-        id:'prestige', name:'ALTIERA PRESTIGE', type:'Parfum Pria', color:'#123D36', pale:'#E3EDE9',
+        id:'prestige', name:'ALTIERA PRESTIGE', type:'Parfum Pria', color:'#123D36', pale:'#E3EDE9', price:99000,
         mood:'Modern dan ningrat', description:'Modern dan ningrat, cocok untuk harian maupun acara spesial.',
         top:'Daun mint dingin, apel hijau segar, dan kulit jeruk pahit.',
         heart:'Lavender pekat berpadu kayu bangsawan; karakter pria karismatik, sukses, dan berwibawa.',
@@ -275,7 +275,7 @@
         images: ["assets/photo_05.jpeg", "assets/photo_06.jpeg", "assets/photo_07.jpeg", "assets/photo_08.jpeg", "assets/photo_03.jpeg"]
       },
       {
-        id:'allure', name:'ALTIERA ALLURE', type:'Parfum Wanita', color:'#7A3045', pale:'#F5E8EC',
+        id:'allure', name:'ALTIERA ALLURE', type:'Parfum Wanita', color:'#7A3045', pale:'#F5E8EC', price:99000,
         mood:'Lembut dan anggun', description:'Lembut dan anggun, cocok untuk harian maupun acara spesial.',
         top:'Buah raspberry liar dan ceri hitam; soft dan elegan.',
         heart:'Kopi hitam premium berpadu bunga peony, berkelas khas butik mewah.',
@@ -288,7 +288,7 @@
         images: ["assets/photo_10.jpeg", "assets/photo_11.jpeg", "assets/photo_12.jpeg", "assets/photo_09.jpeg"]
       },
       {
-        id:'keangkuhan', name:'ALTIERA KEANGKUHAN', type:'Parfum Pria', color:'#493B68', pale:'#EAE8F2',
+        id:'keangkuhan', name:'ALTIERA KEANGKUHAN', type:'Parfum Pria', color:'#493B68', pale:'#EAE8F2', price:99000,
         mood:'Segar dan maskulin', description:'Segar dan maskulin, dirancang untuk pemakaian harian dan outdoor.',
         top:'Buah nanas dan jeruk bergamot yang energik dan bersih.',
         heart:'Kayu cedarwood dengan sentuhan smoky yang maskulin dan berwibawa.',
@@ -349,8 +349,8 @@
         <div class="mt-6 space-y-4"><div class="note-card"><p class="eyebrow text-stone-500">TOP NOTES · 15 MENIT PERTAMA</p><p class="text-sm leading-6 mt-2">${p.top}</p></div><div class="note-card"><p class="eyebrow text-stone-500">HEART NOTES · JAM 1–3</p><p class="text-sm leading-6 mt-2">${p.heart}</p></div><div class="note-card"><p class="eyebrow text-stone-500">BASE NOTES · AROMA DASAR</p><p class="text-sm leading-6 mt-2">${p.base}</p></div></div>
         <div class="mt-6"><p class="eyebrow text-stone-500">DETAIL & PENGIRIMAN</p><ul class="list-disc pl-5 text-sm text-stone-600 leading-7 mt-3"><li>${p.spec}</li><li>${p.longevity}</li><li>Cocok untuk: ${p.uses}</li><li>${p.safety}</li><li>${p.shipping}</li><li>${p.guarantee}</li></ul></div>
         <a href="${LINKS.whatsapp}?text=${encodeURIComponent('Halo ALTIERA, saya ingin membeli '+p.name+' 30ml seharga Rp99.000.')}" target="_blank" rel="noopener" class="btn-primary block text-center py-4 mt-7 text-xs tracking-widest uppercase">Beli via WhatsApp ↗</a>${marketButtons()}
-        </div></div>`;
-      const modal=document.getElementById('productModal');modal.classList.add('open');document.body.style.overflow='hidden';document.getElementById('modalClose').focus();
+        </div><div id="shippingHost" class="md:col-span-2"></div></div>`;
+      if(window.mountShipping)window.mountShipping(p);const modal=document.getElementById('productModal');modal.classList.add('open');document.body.style.overflow='hidden';document.getElementById('modalClose').focus();
     }
     function closeModal(){document.getElementById('productModal').classList.remove('open');document.body.style.overflow='';}
     document.getElementById('modalClose').addEventListener('click',closeModal);
@@ -372,5 +372,6 @@
     setTimeout(()=>document.getElementById('waTooltip').classList.add('fade'),4500);
     renderProducts();renderPyramids();observeReveals();
   </script>
+  <script src="checkout.js"></script>
 </body>
 </html>
